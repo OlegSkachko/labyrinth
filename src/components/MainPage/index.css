@@ -1,0 +1,100 @@
+.main-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-container {
+    position: absolute;
+    top: 20px;
+}
+
+.title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    font-size: 40px;
+    background: orange;
+    color: white;
+    z-index: 2;
+}
+
+.title-decoration {
+    position: absolute;
+    width: 600px;
+    height: 2px;
+    background-color: rgb(53, 53, 216);
+    top: 20px;
+    left: -150px;
+    z-index: 1;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr 1fr 1fr;
+    grid-template-rows:  0.2fr 1fr 1fr 1fr;
+    width: 500px;
+    height: 500px;
+    gap: 5px;
+    color: white;
+}
+
+.game-field-coord {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: rgb(17 187 173);
+}
+
+.game-field {
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b705b7;
+}
+
+.path-container {
+    display: grid;
+    max-width: 525px;
+    max-height: 110px;
+    margin-top: 30px;
+    gap:5px;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.path {
+    width: 100px;
+    height: 100px;
+    border: 2px solid lightgreen;
+    border-radius: 8px;
+}
+
+.right {
+    background-image: url(./../../img/path.gif);
+    background-size: cover;
+}
+
+.left {
+    background-image: url(./../../img/path.gif);
+    background-size: cover;
+    transform: rotate(180deg);
+}
+
+.up {
+    background-image: url(./../../img/path.gif);
+    background-size: cover;
+    transform: rotate(-90deg);
+}
+
+.down {
+    background-image: url(./../../img/path.gif);
+    background-size: cover;
+    transform: rotate(90deg);
+}
