@@ -8,3 +8,11 @@ export interface IInputCheckbox {
         checked: boolean
     }
 }
+
+export interface IGameField {
+    id: number;
+    className: string;
+    content: string;
+    field: number;
+    addContent?: string
+}

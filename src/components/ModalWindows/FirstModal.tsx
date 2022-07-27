@@ -1,10 +1,11 @@
-import React, {ChangeEvent, FC, useState} from 'react'
-import { IFirstModal, IInputCheckbox } from '../interfaces'
+import React, { FC, useState} from 'react'
+import { IFirstModal } from '../interfaces'
 import './index.css'
 
 const FirstModal: FC<IFirstModal> = ({open, setOpen}: IFirstModal) => {
     const dontShowAgain = Boolean(localStorage.getItem('dontShowAgain')) || false
     const [isShowAgain, setIsShowAgain] = useState<boolean>(dontShowAgain)
+
     const handleClose = (e:React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
         setOpen(false)
     }

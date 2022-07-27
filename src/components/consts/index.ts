@@ -1,0 +1,18 @@
+export const GAME_FIELD = [
+    {id: 1, className: "", content: "", field: 0},
+    {id: 2, className: 'game-field-coord', content: "A", field: 0},
+    {id: 3, className: 'game-field-coord', content: "B", field: 0},
+    {id: 4, className: 'game-field-coord', content: "C", field: 0},
+    {id: 5, className: 'game-field-coord', content: "1", field: 0},
+    {id: 6, className: 'game-field', content: "", field: 1, addContent: ''},
+    {id: 7, className: 'game-field', content: "", field: 2, addContent: ''},
+    {id: 8, className: 'game-field', content: "", field: 3, addContent: ''},
+    {id: 9, className: 'game-field-coord', content: "2", field: 0},
+    {id: 10, className: 'game-field', content: "", field: 4, addContent: ''},
+    {id: 11, className: 'game-field', content: "", field: 5, addContent: ''},
+    {id: 12, className: 'game-field', content: "", field: 6, addContent: ''},
+    {id: 13, className: 'game-field-coord', content: "3", field: 0},
+    {id: 14, className: 'game-field', content: "", field: 7, addContent: ''},
+    {id: 15, className: 'game-field', content: "", field: 8, addContent: ''},
+    {id: 16, className: 'game-field', content: "", field: 9, addContent: ''},
+]
