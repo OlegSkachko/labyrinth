@@ -1,40 +1,54 @@
-import React, {useEffect, useState} from 'react'
-import { GAME_FIELD } from '../consts'
+import React, { useEffect, useState} from 'react'
+import { GAME_FIELD, PATH_DIRECTIONS } from '../consts'
 import { IGameField } from '../interfaces'
 import FirstModal from '../ModalWindows/FirstModal'
 import './index.css'
 
 const MainPage = () => {
+    const firstStart = Math.trunc(Math.random()*9)+1
     const [paths, setPaths] = useState<string[]>([])
     const [openFirstTime,setOpenFirstTime] = useState<boolean>(true)
-    const [startPoint, setStartPoint] = useState<number>(1)
-    const [answer, setAnswer] = useState<boolean>(false)
+    const [startPoint, setStartPoint] = useState<number>(firstStart)
+    const [finishPoint, setFinishPoint] = useState<number>(1)
     const [gameFields,setGameFields] =useState<IGameField[]>(GAME_FIELD)
-
+    // eslint-disable-next-line 
     useEffect(()=> generateNewPath(),[])
 
     const generateNewPath = () => {
-        let newPaths: string[] = []
-        let start = Math.trunc(Math.random()*9)+1
-        setStartPoint(start)
-        let pathVariables = ['right', 'left', 'up', 'down']
-        while(newPaths.length < 10) {
-            let path = Math.trunc(Math.random()*4)+1
-            if(pathVariables[path] !== undefined) {
-                newPaths.push(pathVariables[path])
+            setPaths([])
+            let newPaths: string[] = []
+            let finish = startPoint
+            while(newPaths.length < 10) {
+            const curDirections = PATH_DIRECTIONS[finish-1]
+            let path = Math.trunc(Math.random()*4)
+            if(path!== undefined && curDirections?.directions[path] !== undefined) {
+                const newDir = curDirections?.directions[path] 
+                finish = newDir.field
+                newPaths.push(newDir.path)
             }
         }
-        setPaths(newPaths)
+            let newGamefields = GAME_FIELD.map((gamefield)=> {
+                if(startPoint === gamefield.field) {
+                    return {...gamefield, addContent: 'start'}
+                }
+                return gamefield
+            })
+           
+        setTimeout(()=>{
+            setFinishPoint(finish)
+            setGameFields(newGamefields)
+            setPaths(newPaths)
+        },1000)   
     }
 
     const handleGameField = (field:number) => {
-        setAnswer(true)
-        let finishPoint = 5
-        let newGamefields = GAME_FIELD.map((gamefield)=> {
+        let start = Math.trunc(Math.random()*9)+1
+        if(start === startPoint) start = 10-start
+        setStartPoint(start) 
+            let newGamefields = GAME_FIELD.map((gamefield)=> {
                 if(gamefield.field === field) {
                     if(finishPoint === field) return {...gamefield, addContent: 'like'}
-                    else return {...gamefield, addContent: 'dislike'}
-                }
+                    else return {...gamefield, addContent: 'dislike'}}
                 if(gamefield.field === finishPoint) {
                     return {...gamefield, addContent: 'finish'}
                 }
@@ -59,8 +73,7 @@ const MainPage = () => {
                     onClick={()=> handleGameField(gamefield.field)}
                 >
                     { gamefield.content }
-                    { answer && <div className={gamefield.addContent}/>}
-                    { (startPoint === gamefield.field) && !answer && <div className='start'/>}
+                    <div className={gamefield.addContent}/>
                 </div>
             )}
         </div>
