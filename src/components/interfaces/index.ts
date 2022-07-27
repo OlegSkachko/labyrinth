@@ -16,3 +16,15 @@ export interface IGameField {
     field: number;
     addContent?: string
 }
+
+type DirectionTypes = "up" | "right" | "left"| "down"
+
+interface IDirections {
+    path: DirectionTypes
+    field: number
+}
+
+export interface IPathDirections {
+    field: number;
+    directions:  IDirections[]
+}

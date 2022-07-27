@@ -16,3 +16,15 @@ export const GAME_FIELD = [
     {id: 15, className: 'game-field', content: "", field: 8, addContent: ''},
     {id: 16, className: 'game-field', content: "", field: 9, addContent: ''},
 ]
+
+export const PATH_DIRECTIONS = [
+    {field: 1, directions: [ {path: "right", field:2 }, {path:"down", field:4}] },
+    {field: 2, directions: [ {path: "right", field:3 }, { path:"left", field:1 },  {path: "down", field:5 }]},
+    {field: 3, directions: [ {path: "left", field:2 }, {path: "down", field:6 }]},
+    {field: 4, directions: [ {path: "up", field:1 }, {path: "right", field:5 },  {path: "down", field:7 }]},
+    {field: 5, directions: [ {path: "up", field:2 }, {path: "right", field:6 }, {path: "left", field:4 }, {path:"down", field:8 }]},
+    {field: 6, directions: [ {path: "up", field:3 }, {path: "left", field:5 }, {path: "down", field:9 }]},
+    {field: 7, directions: [ {path: "up", field:4 }, {path: "right", field:8 }]},
+    {field: 8, directions: [ {path: "up", field:5 }, {path: "right", field:9 }, {path: "left", field:7 }]},
+    {field: 9, directions: [ {path: "up", field:6 }, {path: "left", field:8 }]},   
+]
