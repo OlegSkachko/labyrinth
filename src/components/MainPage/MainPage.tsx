@@ -1,60 +1,25 @@
-import React, { useEffect, useState} from 'react'
-import { GAME_FIELD, PATH_DIRECTIONS } from '../consts'
+import React, { FC, useEffect, useState} from 'react'
 import { IGameField } from '../interfaces'
 import FirstModal from '../ModalWindows/FirstModal'
+import { useAppDispatch, useAppSelector } from '../redux/hooks/reduxHooks'
+import { asyncCreateNewPath, resetPath, selectlabyrinth, updateGameField } from '../redux/slices'
 import './index.css'
 
-const MainPage = () => {
-    const firstStart = Math.trunc(Math.random()*9)+1
-    const [paths, setPaths] = useState<string[]>([])
+const MainPage: FC = () => {
     const [openFirstTime,setOpenFirstTime] = useState<boolean>(true)
-    const [startPoint, setStartPoint] = useState<number>(firstStart)
-    const [finishPoint, setFinishPoint] = useState<number>(1)
-    const [gameFields,setGameFields] =useState<IGameField[]>(GAME_FIELD)
+    const labyrinth = useAppSelector(selectlabyrinth);
+    const dispatch = useAppDispatch()
+
     // eslint-disable-next-line 
     useEffect(()=> generateNewPath(),[])
 
     const generateNewPath = () => {
-            setPaths([])
-            let newPaths: string[] = []
-            let finish = startPoint
-            while(newPaths.length < 10) {
-            const curDirections = PATH_DIRECTIONS[finish-1]
-            let path = Math.trunc(Math.random()*4)
-            if(path!== undefined && curDirections?.directions[path] !== undefined) {
-                const newDir = curDirections?.directions[path] 
-                finish = newDir.field
-                newPaths.push(newDir.path)
-            }
-        }
-            let newGamefields = GAME_FIELD.map((gamefield)=> {
-                if(startPoint === gamefield.field) {
-                    return {...gamefield, addContent: 'start'}
-                }
-                return gamefield
-            })
-           
-        setTimeout(()=>{
-            setFinishPoint(finish)
-            setGameFields(newGamefields)
-            setPaths(newPaths)
-        },1000)   
+        dispatch(resetPath())
+        dispatch(asyncCreateNewPath())
     }
 
     const handleGameField = (field:number) => {
-        let start = Math.trunc(Math.random()*9)+1
-        if(start === startPoint) start = 10-start
-        setStartPoint(start) 
-            let newGamefields = GAME_FIELD.map((gamefield)=> {
-                if(gamefield.field === field) {
-                    if(finishPoint === field) return {...gamefield, addContent: 'like'}
-                    else return {...gamefield, addContent: 'dislike'}}
-                if(gamefield.field === finishPoint) {
-                    return {...gamefield, addContent: 'finish'}
-                }
-                return gamefield
-            })
-        setGameFields(newGamefields)
+        dispatch(updateGameField(field))
         generateNewPath()
     }
 
@@ -66,7 +31,7 @@ const MainPage = () => {
             <div className='title'>Лабиринт</div>
         </div>
         <div className='game'>
-            { gameFields.map((gamefield: IGameField)=> 
+            { labyrinth.gameField.map((gamefield: IGameField)=> 
                 <div 
                     key={gamefield.id}
                     className={gamefield.className}
@@ -78,7 +43,7 @@ const MainPage = () => {
             )}
         </div>
         <div className='path-container'>
-            { paths.map((path, index) => 
+            { labyrinth.paths.map((path, index) => 
                 <div 
                     key={index} 
                     className={`path ${path}`}
