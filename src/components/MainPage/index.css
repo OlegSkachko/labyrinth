@@ -151,3 +151,30 @@
 .down {
     background-image: url(./../../img/down.gif);
 }
+
+@media screen and (max-width:700px) {
+    .title-decoration {
+        position: absolute;
+        width: 400px;
+        left: -50px;
+    }
+    .game {
+        width: 350px;
+        height: 350px;
+    }
+    .start, .like, .dislike, .finish {
+        width: 25px;
+        height: 25px;
+        top: 10px;
+    }
+    .path-container {
+        margin: auto;
+        bottom: 50px;
+        max-width: 310px;
+        max-height: 125px;
+    }
+    .path {
+        width: 55px;
+        height: 55px;
+    }
+}
