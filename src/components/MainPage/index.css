@@ -159,8 +159,8 @@
         left: -50px;
     }
     .game {
-        width: 350px;
-        height: 350px;
+        width: 300px;
+        height: 300px;
     }
     .start, .like, .dislike, .finish {
         width: 25px;
@@ -169,7 +169,7 @@
     }
     .path-container {
         margin: auto;
-        bottom: 50px;
+        bottom: 10px;
         max-width: 310px;
         max-height: 125px;
     }
